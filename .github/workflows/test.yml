@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: commit messages
+        if: ${{ ${SKIP} == true }}
         env:
           SKIP: ${{ contains(github.event.head_commit.message, '#skip') }}
         run: echo "$SKIP"
