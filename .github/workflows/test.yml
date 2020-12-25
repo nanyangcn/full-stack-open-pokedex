@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: join('COMMIT_MESSAGES', '#skip')
+          SKIP: ${{ contains(github.event.commits.*.message, '#skip') }}
+        run: echo "$SKIP"
