@@ -11,7 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: commit messages
-        env:
-          SKIP: ${{ contains(github.event.head_commit.message, '#skip') }}
-        if: ${{ ${SKIP} == true }}
-        run: echo "$SKIP"
+        if: ${{ contains(github.event.head_commit.message, '#skip') }}
+        run: echo "skip merging and tagging"
