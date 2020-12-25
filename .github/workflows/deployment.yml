@@ -1,32 +1,32 @@
-name: simple_deployment_pipeline
+# name: simple_deployment_pipeline
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+# on:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+#     branches: [master]
+#     types: [opened, synchronize]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
-        if: ${{ github.event_name == 'push' }}
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokedex-img-list" #Must be unique in Heroku
-          heroku_email: "nanyang@kth.se"
-          healthcheck: "https://pokedex-img-list.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-      - uses: actions/checkout@v2
-      - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.33.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          DEFAULT_BUMP: patch
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
+#         if: ${{ github.event_name == 'push' }}
+#         with:
+#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#           heroku_app_name: "pokedex-img-list" #Must be unique in Heroku
+#           heroku_email: "nanyang@kth.se"
+#           healthcheck: "https://pokedex-img-list.herokuapp.com/health"
+#           checkstring: "ok"
+#           rollbackonhealthcheckfailed: true
+#       - uses: actions/checkout@v2
+#       - name: Bump version and push tag
+#         if: ${{ github.event_name == 'push' }}
+#         uses: anothrNick/github-tag-action@1.33.0
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           WITH_V: true
+#           DEFAULT_BUMP: patch
