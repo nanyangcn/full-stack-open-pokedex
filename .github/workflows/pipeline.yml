@@ -1,32 +1,32 @@
-# name: Deployment pipeline
+name: Deployment pipeline
 
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     branches: [master]
-#     types: [opened, synchronize]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
     
-# jobs:
-#   simple_deployment_pipeline:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: '12.x'
-#       - name: yarn install 
-#         run: yarn install  
-#       - name: lint
-#         run: yarn eslint
-#       - name: build
-#         run: yarn build
-#       - name: test
-#         run: yarn test
-#       - name: e2e tests
-#         uses: cypress-io/github-action@v2
-#         with:
-#           command: yarn test:e2e
-#           start: yarn start-prod
-#           wait-on: http://localhost:5000
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: yarn install 
+        run: yarn install  
+      - name: lint
+        run: yarn eslint
+      - name: build
+        run: yarn build
+      - name: test
+        run: yarn test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: yarn test:e2e
+          start: yarn start-prod
+          wait-on: http://localhost:5000
